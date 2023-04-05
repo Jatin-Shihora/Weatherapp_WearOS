@@ -70,7 +70,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-permissions:0.25.0"
 
     //location
-    implementation 'com.google.android.gms:play-services-location:20.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
