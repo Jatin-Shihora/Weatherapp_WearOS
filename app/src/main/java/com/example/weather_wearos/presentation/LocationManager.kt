@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Looper
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.ActivityCompat
+import com.example.weather_wearos.presentation.data.WeatherApi
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationCallback
 import kotlinx.coroutines.CoroutineScope
@@ -49,6 +50,7 @@ class LocationManager  {
                         CoroutineScope(Dispatchers.IO).launch {
                             val weatherDTO = WeatherApi.apiInstance.getWeatherDetails(
                                 location.latitude,
+//TODO: Add the api value from openweather instead of "My weather api"
                                 location.longitude, "my weather api")
                             data.value = CardData(
                                 weatherInfo = weatherDTO.weather[0].description,
