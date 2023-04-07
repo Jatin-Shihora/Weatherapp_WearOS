@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Looper
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.ActivityCompat
+import com.example.weather_wearos.BuildConfig
 import com.example.weather_wearos.presentation.data.WeatherApi
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationCallback
@@ -16,7 +17,10 @@ import kotlin.math.roundToInt
 
 class LocationManager  {
     val dataLoaded = mutableStateOf(false)
-
+    //[Step 1&2 are in module level gradle build]
+    // 3. Now you can use your api key by doing something like
+    // this in your kotlin files:- val apikey = BuildConfig.API_KEY
+    val openWeatherAPIKEY = BuildConfig.API_KEY
     val data = mutableStateOf(
         CardData(
             weatherInfo = "",
@@ -50,8 +54,7 @@ class LocationManager  {
                         CoroutineScope(Dispatchers.IO).launch {
                             val weatherDTO = WeatherApi.apiInstance.getWeatherDetails(
                                 location.latitude,
-//TODO: Add the api value from openweather instead of "My weather api"
-                                location.longitude, "my weather api")
+                                location.longitude, openWeatherAPIKEY)
                             data.value = CardData(
                                 weatherInfo = weatherDTO.weather[0].description,
                                 time = "${(weatherDTO.main.temp - 273).roundToInt()}°C",
